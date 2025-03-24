@@ -10,6 +10,7 @@ import { getQueryClient } from '@/lib'
 
 export const Wrappers = ({ children }: { children: React.ReactNode }) => {
   const queryClient = getQueryClient()
+
   return (
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
       <QueryClientProvider client={queryClient}>
