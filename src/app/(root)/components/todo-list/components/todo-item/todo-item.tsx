@@ -23,6 +23,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, page }: TodoItemProps)
         <Checkbox
           defaultChecked={todo.completed}
           className='size-5 cursor-pointer'
+          aria-label='Completed todo'
           onClick={() => patchTodo({ ...todo, completed: !todo.completed })}
         />
         <p className='truncate'>{todo.title}</p>
@@ -30,6 +31,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, page }: TodoItemProps)
       <div className='flex space-x-2.5'>
         <PatchTodoDialog todo={todo}>
           <Button variant='secondary' size='icon' className='[&_svg]:!size-[1.2rem]'>
+            <span className='sr-only'>Patch todo</span>
             <RefreshCcw />
           </Button>
         </PatchTodoDialog>
@@ -40,6 +42,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, page }: TodoItemProps)
           disabled={deleteTodoIsPending}
           onClick={() => deleteTodo(todo.id)}
         >
+          <span className='sr-only'>Delete todo</span>
           <CircleX />
         </Button>
       </div>

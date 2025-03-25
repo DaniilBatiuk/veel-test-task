@@ -19,9 +19,6 @@ export const useTodoPatch = (page: number) => {
         getTodoListQueryOptions(page).queryKey,
       )
 
-      console.log('previousTodosList', previousTodosList)
-      console.log('patchTodo', patchTodo)
-
       if (previousTodosList) {
         queryClient.setQueryData<TodoDto[]>(
           getTodoListQueryOptions(page).queryKey,

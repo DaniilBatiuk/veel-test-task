@@ -1,7 +1,6 @@
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
-
 import { Button } from '@/components/ui'
+
+import { useUpdateSearchParams } from './hooks/use-update-search-params'
 
 interface PaginationProps {
   page: number
@@ -9,14 +8,7 @@ interface PaginationProps {
 }
 
 export const Pagination: React.FC<PaginationProps> = ({ page, setPage }: PaginationProps) => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams)
-    params.set('page', page.toString())
-    router.push(`?${params.toString()}`, { scroll: false })
-  }, [page])
+  useUpdateSearchParams(page)
 
   return (
     <div className='mt-5 mb-5 flex items-center justify-center gap-x-4 md:mb-7 lg:mb-10'>

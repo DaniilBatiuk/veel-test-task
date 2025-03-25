@@ -16,7 +16,7 @@ export function ThemeToggle() {
         setTheme(theme === 'light' ? 'dark' : 'light')
       }}
     >
-      {/* <span className='sr-only'>Toggle theme</span> */}
+      <span className='sr-only'>Toggle theme</span>
       <Sun className='dark:hidden' />
       <Moon className='hidden dark:block' />
     </Button>
