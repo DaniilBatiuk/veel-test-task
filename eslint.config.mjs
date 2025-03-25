@@ -1,28 +1,29 @@
-import { FlatCompat } from '@eslint/eslintrc'
-import js from '@eslint/js'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import antfu from '@antfu/eslint-config'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
+const config = antfu({
+  typescript: true,
+  react: true,
+  jsx: true,
+  tailwind: true,
+  stylistic: false,
+  extends: ['plugin:@tanstack/eslint-plugin-query/recommended', 'plugin:@next/next/recommended'],
+  rules: {
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-require-imports': 'warn',
+    'no-console': 'warn',
+    'prefer-const': 'warn',
+    'react/jsx-no-undef': 'error',
+    'no-undef': 'off',
+    'node/prefer-global/process': 'off',
+    'import/consistent-type-specifier-style': 'off',
+    'perfectionist/sort-named-imports': 'off',
+    'no-undef-init': 'off',
+    eqeqeq: 'warn',
+    'prefer-template': 'warn',
+    'perfectionist/sort-imports': 'off',
+    'jsonc/sort-keys': 'off',
+    'unicorn/prefer-number-properties': 'off',
+  },
 })
 
-const eslintConfig = [
-  ...compat.extends('next/typescript', '@tanstack/eslint-plugin-query'),
-  {
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off',
-      'react/no-unescaped-entities': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-require-imports': 'warn',
-    },
-  },
-]
-
-export default eslintConfig
+export default config
