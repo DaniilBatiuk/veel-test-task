@@ -35,7 +35,14 @@ export const TodoList: React.FC = () => {
             <p className='text-2xl font-bold'>No Todos</p>
           </div>
         ) : (
-          todos.map(todo => <TodoItem todo={todo} key={todo.id} page={page} />)
+          todos.map((todo, index) => (
+            <TodoItem
+              todo={todo}
+              key={todo.id}
+              page={page}
+              className={`animate-appear-right opacity-0 delay-${index * 50}`}
+            />
+          ))
         )}
       </div>
 

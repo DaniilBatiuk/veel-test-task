@@ -11,7 +11,7 @@ export const Pagination: React.FC<PaginationProps> = ({ page, setPage }: Paginat
   useUpdateSearchParams(page)
 
   return (
-    <div className='mt-5 mb-5 flex items-center justify-center gap-x-4 md:mb-7 lg:mb-10'>
+    <div className='animate-appear-bottom mt-5 mb-5 flex items-center justify-center gap-x-4 md:mb-7 lg:mb-10'>
       <Button onClick={() => setPage(prev => Math.max(prev - 1, 1))} disabled={page === 1}>
         Prev
       </Button>

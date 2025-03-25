@@ -2,22 +2,32 @@ import { CircleX, RefreshCcw } from 'lucide-react'
 
 import { Button, Checkbox } from '@/components/ui'
 
+import { cn } from '@/lib'
+
 import { PatchTodoDialog } from './components/patch-todo-dialog/patch-todo-dialog'
 import { useTodoDelete, useTodoPatch } from '@/models'
 
-interface TodoItemProps {
+interface TodoItemProps extends React.HTMLAttributes<HTMLDivElement> {
   todo: TodoDto
   page: number
 }
 
-export const TodoItem: React.FC<TodoItemProps> = ({ todo, page }: TodoItemProps) => {
+export const TodoItem: React.FC<TodoItemProps> = ({
+  todo,
+  page,
+  className,
+  ...props
+}: TodoItemProps) => {
   const { mutate: deleteTodo, isPending: deleteTodoIsPending } = useTodoDelete(page)
   const { mutate: patchTodo } = useTodoPatch(page)
 
   return (
     <div
-      className='hover:bg-foreground/5 flex items-center justify-between space-x-3 rounded-lg border px-4 py-3'
-      key={todo.id}
+      className={cn(
+        'hover:bg-foreground/5 flex items-center justify-between space-x-3 rounded-lg border px-4 py-3',
+        className,
+      )}
+      {...props}
     >
       <div className='flex w-full max-w-[calc(100%-90px)] items-center space-x-3'>
         <Checkbox
