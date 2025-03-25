@@ -1,2 +1,2 @@
-export * from './header/components/wrappers/wrappers'
 export * from './header/header'
+export * from './wrappers/wrappers'
