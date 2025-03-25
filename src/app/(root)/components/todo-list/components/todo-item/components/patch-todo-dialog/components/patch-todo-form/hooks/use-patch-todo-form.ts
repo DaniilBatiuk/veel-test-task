@@ -28,7 +28,6 @@ export const usePatchTodoForm = (todo: TodoDto, setIsOpen: (isOpen: boolean) => 
   const onSubmit = (data: PatchTodo) => {
     patchTodo({ ...todo, ...data })
     setIsOpen(false)
-    reset()
   }
 
   return { register, handleSubmit, reset, errors, isSubmitting, onSubmit }

@@ -116,6 +116,7 @@
     @apply border-border outline-ring/50;
   }
   body {
+    overflow-x: hidden;
     @apply bg-background text-foreground;
   }
 }
@@ -130,7 +131,90 @@
   }
 }
 
+@layer utilities {
+  @keyframes appear-left {
+    from {
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes appear-right {
+    from {
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateX(+100%);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes appear-bottom {
+    from {
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateY(+100%);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  .delay-0 {
+    animation-delay: 0ms;
+  }
+
+  .delay-50 {
+    animation-delay: 50ms;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-250 {
+    animation-delay: 250ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-350 {
+    animation-delay: 350ms;
+  }
+
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .delay-450 {
+    animation-delay: 450ms;
+  }
+}
+
 @theme {
   --animate-spin: spin 2s linear infinite;
-  --fluid-default-screens: 20rem 1024px;
+  --animate-appear-left: appear-left 0.5s ease-out forwards;
+  --animate-appear-right: appear-right 0.5s ease-out forwards;
+  --animate-appear-bottom: appear-bottom 0.5s ease-out forwards;
 }
