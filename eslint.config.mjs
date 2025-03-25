@@ -12,7 +12,7 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  ...compat.extends('next/typescript', '@tanstack/eslint-plugin-query'),
+  ...compat.extends('next/typescript', 'plugin:@tanstack/eslint-plugin-query/recommended'),
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
