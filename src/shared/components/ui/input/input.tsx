@@ -12,7 +12,7 @@ export const inputVariants = cva(
         md: 'h-12 px-5 !text-base',
       },
       error: {
-        true: 'border-red-600 focus-visible:border-red-600',
+        true: 'border-red-600 focus-visible:!border-red-600 ',
         false: '',
       },
     },
@@ -32,7 +32,7 @@ function Input({ className, type, size, error, ...props }: InputProps) {
     <input
       type={type}
       data-slot='input'
-      className={cn(inputVariants({ size, error, className }))}
+      className={cn(inputVariants({ size, className, error }))}
       {...props}
     />
   )
