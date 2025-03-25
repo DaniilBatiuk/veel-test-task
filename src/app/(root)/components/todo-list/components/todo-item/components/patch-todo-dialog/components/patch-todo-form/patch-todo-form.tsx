@@ -6,17 +6,22 @@ import { useForm } from 'react-hook-form'
 
 import { Button, Input, Label } from '@/components/ui'
 
-import { CreateTodo, todoScheme } from '@/validators'
+import { CreateTodo, PatchTodo, todoScheme } from '@/validators'
 
-import { useCreateTodo } from '@/models'
+import { useTodoPatch } from '@/models'
 
-interface CreateTodoFormProps {
+interface PatchTodoFormProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>
+  todo: TodoDto
 }
 
-export const CreateTodoForm: React.FC<CreateTodoFormProps> = ({
+export const PatchTodoForm: React.FC<PatchTodoFormProps> = ({
   setIsOpen,
-}: CreateTodoFormProps) => {
+  todo,
+}: PatchTodoFormProps) => {
+  const searchParams = useSearchParams()
+  const page = searchParams.get('page')
+
   const {
     register,
     handleSubmit,
@@ -25,17 +30,15 @@ export const CreateTodoForm: React.FC<CreateTodoFormProps> = ({
   } = useForm<CreateTodo>({
     resolver: zodResolver(todoScheme),
     defaultValues: {
-      title: '',
+      title: todo.title,
     },
     mode: 'onSubmit',
   })
-  const searchParams = useSearchParams()
-  const page = searchParams.get('page')
 
-  const { mutate: createTodo } = useCreateTodo(page ? +page : 1)
+  const { mutate: patchTodo } = useTodoPatch(page ? +page : 1)
 
-  const onSubmit = (data: CreateTodo) => {
-    createTodo(data)
+  const onSubmit = (data: PatchTodo) => {
+    patchTodo({ ...todo, ...data })
     setIsOpen(false)
     reset()
   }
@@ -63,7 +66,7 @@ export const CreateTodoForm: React.FC<CreateTodoFormProps> = ({
         </div>
       </div>
       <Button size='lg' className='mt-5 w-full' type='submit' disabled={isSubmitting}>
-        Create
+        Patch
       </Button>
     </form>
   )

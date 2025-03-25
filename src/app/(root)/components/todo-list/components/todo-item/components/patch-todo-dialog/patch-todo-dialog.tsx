@@ -11,15 +11,17 @@ import {
   DialogTrigger,
 } from '@/components/ui'
 
-import { CreateTodoForm } from './components/create-todo-form/create-todo-form'
+import { PatchTodoForm } from './components/patch-todo-form/patch-todo-form'
 
-interface CreateTodoDialogProps {
+interface PatchTodoDialogProps {
   children: React.ReactNode
+  todo: TodoDto
 }
 
-export const CreateTodoDialog: React.FC<CreateTodoDialogProps> = ({
+export const PatchTodoDialog: React.FC<PatchTodoDialogProps> = ({
   children,
-}: CreateTodoDialogProps) => {
+  todo,
+}: PatchTodoDialogProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -27,10 +29,10 @@ export const CreateTodoDialog: React.FC<CreateTodoDialogProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className='max-w-[500px]'>
         <DialogHeader>
-          <DialogTitle>Create Todo</DialogTitle>
-          <DialogDescription className='hidden'>Create Todo</DialogDescription>
+          <DialogTitle>Patch Todo</DialogTitle>
+          <DialogDescription className='hidden'>Patch Todo</DialogDescription>
         </DialogHeader>
-        <CreateTodoForm setIsOpen={setIsOpen} />
+        <PatchTodoForm setIsOpen={setIsOpen} todo={todo} />
       </DialogContent>
     </Dialog>
   )
