@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { v4 as uuidv4 } from 'uuid'
 
-import { CreateTodo } from '@/validators'
+import type { CreateTodo } from '@/validators'
 
 import { getQueryClient, getTodoListQueryOptions } from '@/lib'
 

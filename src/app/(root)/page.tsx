@@ -1,7 +1,11 @@
 import { Button } from '@/components/ui'
 
+import { metadataFactory } from '@/helpers'
+
 import { CreateTodoDialog } from './components/create-todo-dialog/create-todo-dialog'
 import { TodoList } from './components/todo-list/todo-list'
+
+export const metadata = metadataFactory('Home')
 
 export default async function Home() {
   return (

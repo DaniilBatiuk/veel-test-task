@@ -13,7 +13,6 @@ export const Wrappers = ({ children }: { children: React.ReactNode }) => {
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
       <QueryClientProvider client={queryClient}>
         {children}
-
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>

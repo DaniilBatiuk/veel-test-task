@@ -1,14 +1,9 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useSearchParams } from 'next/navigation'
-import { Dispatch, SetStateAction } from 'react'
-import { useForm } from 'react-hook-form'
+import type { Dispatch, SetStateAction } from 'react'
 
 import { Button, Input, Label } from '@/components/ui'
 
-import { CreateTodo, PatchTodo, todoScheme } from '@/validators'
-
-import { useTodoPatch } from '@/models'
+import { usePatchTodoForm } from './hooks/use-patch-todo-form'
 
 interface PatchTodoFormProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>
@@ -19,29 +14,10 @@ export const PatchTodoForm: React.FC<PatchTodoFormProps> = ({
   setIsOpen,
   todo,
 }: PatchTodoFormProps) => {
-  const searchParams = useSearchParams()
-  const page = searchParams.get('page')
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<CreateTodo>({
-    resolver: zodResolver(todoScheme),
-    defaultValues: {
-      title: todo.title,
-    },
-    mode: 'onSubmit',
-  })
-
-  const { mutate: patchTodo } = useTodoPatch(page ? +page : 1)
-
-  const onSubmit = (data: PatchTodo) => {
-    patchTodo({ ...todo, ...data })
-    setIsOpen(false)
-    reset()
-  }
+  const { register, handleSubmit, errors, isSubmitting, onSubmit } = usePatchTodoForm(
+    todo,
+    setIsOpen,
+  )
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>

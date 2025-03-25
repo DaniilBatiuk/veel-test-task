@@ -1,14 +1,9 @@
 import { ErrorMessage } from '@hookform/error-message'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useSearchParams } from 'next/navigation'
-import { Dispatch, SetStateAction } from 'react'
-import { useForm } from 'react-hook-form'
+import type { Dispatch, SetStateAction } from 'react'
 
 import { Button, Input, Label } from '@/components/ui'
 
-import { CreateTodo, todoScheme } from '@/validators'
-
-import { useCreateTodo } from '@/models'
+import { useCreateTodoForm } from './hooks/use-create-todo-form'
 
 interface CreateTodoFormProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>
@@ -17,28 +12,7 @@ interface CreateTodoFormProps {
 export const CreateTodoForm: React.FC<CreateTodoFormProps> = ({
   setIsOpen,
 }: CreateTodoFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<CreateTodo>({
-    resolver: zodResolver(todoScheme),
-    defaultValues: {
-      title: '',
-    },
-    mode: 'onSubmit',
-  })
-  const searchParams = useSearchParams()
-  const page = searchParams.get('page')
-
-  const { mutate: createTodo } = useCreateTodo(page ? +page : 1)
-
-  const onSubmit = (data: CreateTodo) => {
-    createTodo(data)
-    setIsOpen(false)
-    reset()
-  }
+  const { register, handleSubmit, errors, isSubmitting, onSubmit } = useCreateTodoForm(setIsOpen)
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>

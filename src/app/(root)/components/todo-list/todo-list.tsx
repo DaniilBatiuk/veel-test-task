@@ -30,7 +30,7 @@ export const TodoList: React.FC = () => {
   return (
     <div>
       <div className={cn('flex flex-col gap-y-2', { 'opacity-50': isPlaceholderData })}>
-        {todos.length <= 0 ? (
+        {todos.length === 0 ? (
           <div className='bg-foreground/5 flex h-50 items-center justify-center rounded-2xl'>
             <p className='text-2xl font-bold'>No Todos</p>
           </div>
@@ -38,6 +38,7 @@ export const TodoList: React.FC = () => {
           todos.map(todo => <TodoItem todo={todo} key={todo.id} page={page} />)
         )}
       </div>
+
       <Pagination page={page} setPage={setPage} />
     </div>
   )
